@@ -3,3 +3,43 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+textarea:focus,
+input:focus,
+select:focus,
+button:focus,
+a:focus {
+  outline: 0;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 50px;
+}
+
+.container p {
+  font-size: 50px;
+  font-weight: bold;
+  font-family: "VT323", monospace;
+}
+
+.container input {
+  width: 100px;
+  height: 50px;
+
+  border: none;
+  border-bottom: 4px solid #000;
+
+  text-align: center;
+
+  font-size: 50px;
+  font-weight: bold;
+  font-family: "VT323", monospace;
+}
