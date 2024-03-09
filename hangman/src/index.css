@@ -17,27 +17,46 @@ a:focus {
   height: 100vh;
 
   display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.game-container {
+  width: 50vw;
+  height: 50vh;
+
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  gap: 50px;
+  background-color: #006400;
+
+  border: 10px solid #8B4513	;
+  border-radius: 10px;
+
+  gap: 30px;
 }
 
-.container p {
+.game-container p {
   font-size: 50px;
   font-weight: bold;
   font-family: "VT323", monospace;
+
+  color: #FFF;
 }
 
-.container input {
-  width: 100px;
+.game-container input {
+  width: 50px;
   height: 50px;
 
   border: none;
-  border-bottom: 4px solid #000;
+  border-bottom: 4px solid #FFF;
 
   text-align: center;
+
+  background-color: transparent;
 
   font-size: 50px;
   font-weight: bold;

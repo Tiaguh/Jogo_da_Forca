@@ -47,16 +47,18 @@ export default function App() {
 
 
   return (
-    <form
-      onSubmit={checkGuess}
-      className="container"
-    >
-      <p>{maskedWord}</p>
+    <div className="container">
+      <form
+        onSubmit={checkGuess}
+        className="game-container"
+      >
+        <p>{maskedWord}</p>
 
-      <input
-        onChange={(e) => setGuess(e.target.value)}
-        maxLength={1}
-      />
-    </form>
+        <input
+          onChange={(e) => setGuess(e.target.value)}
+          maxLength={1}
+        />
+      </form>
+    </div>
   );
 }
