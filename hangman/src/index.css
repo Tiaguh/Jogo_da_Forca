@@ -23,7 +23,7 @@ a:focus {
 }
 
 .game-container {
-  width: 50vw;
+  width: 60vw;
   height: 50vh;
 
   display: flex;
@@ -41,10 +41,11 @@ a:focus {
 
 .game-container p {
   font-size: 50px;
-  font-weight: bold;
   font-family: "VT323", monospace;
 
   color: #FFF;
+
+  letter-spacing: 3px;
 }
 
 .game-container input {
@@ -56,9 +57,11 @@ a:focus {
 
   text-align: center;
 
+  color: #FFF;
+
   background-color: transparent;
 
-  font-size: 50px;
+  font-size: 40px;
   font-weight: bold;
   font-family: "VT323", monospace;
 }
