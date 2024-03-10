@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import { MdOutlineRefresh } from "react-icons/md";
+
 export default function App() {
   const [word, setWord] = useState('');
   const [guess, setGuess] = useState('');
   const [maskedWord, setMaskedWord] = useState('');
+  const [gameOver, setGameOver] = useState(false);
 
   console.log(word);
 
@@ -40,18 +43,47 @@ export default function App() {
         .join('');
 
       setMaskedWord(newMaskedWord);
+
+      if (!newMaskedWord.includes('_')) {
+        console.log("Parabéns! Você acertou todas as letras.");
+        setGameOver(true);
+      }
     } else {
       console.log("A palavra não tem essa letra.");
     }
+
     setGuess('');
   }
 
   return (
     <div className="container">
-      <form onSubmit={checkGuess} className="game-container">
-        <p>{maskedWord}</p>
-        <input onChange={(e) => setGuess(e.target.value)} maxLength={1} />
-      </form>
+      <div className="black-board">
+        {gameOver ? (
+          <div className="game-end">
+            <h2>Parabéns você acertou a palavra!</h2>
+            <button onClick={() => setGameOver(false)} >Jogar novamente</button>
+          </div>
+        ) : maskedWord ? (
+          <>
+            <form onSubmit={checkGuess} className="game-container">
+              <p>{maskedWord}</p>
+              <input
+                onChange={(e) => setGuess(e.target.value)}
+                maxLength={1}
+                value={guess}
+              />
+            </form>
+            
+            <div className="restart-game-container" >
+              <button onClick={() => setGameOver(false)}>
+                <MdOutlineRefresh color="#FFF" size={50} />
+              </button>
+            </div>
+          </>
+        ) : (
+          <h2>Escolhendo a palavra...</h2>
+        )}
+      </div>
     </div>
-  );
+  )
 }
