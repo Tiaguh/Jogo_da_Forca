@@ -19,24 +19,38 @@ a:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
-.game-container {
+.black-board {
   width: 60vw;
   height: 50vh;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
 
   background-color: #006400;
 
-  border: 10px solid #8B4513	;
+  border: 10px solid #8B4513;
   border-radius: 10px;
+}
 
-  gap: 30px;
+.black-board h2 {
+  font-size: 35px;
+  font-family: "VT323", monospace;
+  font-weight: normal;
+
+  color: #FFF;
+}
+
+.game-container {
+  width: 100%;
+  height: 70%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .game-container p {
@@ -45,7 +59,7 @@ a:focus {
 
   color: #FFF;
 
-  letter-spacing: 3px;
+  letter-spacing: 15px;
 }
 
 .game-container input {
@@ -55,13 +69,67 @@ a:focus {
   border: none;
   border-bottom: 4px solid #FFF;
 
+  font-size: 50px;
+  font-family: "VT323", monospace;
+  color: #FFF;
+
   text-align: center;
 
-  color: #FFF;
+  background-color: transparent;
+}
+
+.game-container button {
+  width: 50px;
+  height: 50px;
 
   background-color: transparent;
 
-  font-size: 40px;
-  font-weight: bold;
+  border: none;
+}
+
+.restart-game-container {
+  width: 100%;
+  height: 30%;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  padding-inline: 25px;
+}
+
+.restart-game-container button {
+  background-color: transparent;
+  border: none;
+
+  cursor: pointer;
+}
+
+.game-end {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 15px;
+}
+
+.game-end button {
+  width: 250px;
+  height: 50px;
+
+  background-color: transparent;
+
+  border: 2px solid #FFF;
+  border-radius: 5px;
+
+  font-size: 25px;
   font-family: "VT323", monospace;
+  color: #FFF;
+
+  cursor: pointer;
+}
+
+.game-end button:hover {
+  background-color: #FFF;
+  color: #006400;
 }
