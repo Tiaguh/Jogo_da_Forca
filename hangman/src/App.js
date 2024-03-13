@@ -2,31 +2,42 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import { MdOutlineRefresh } from "react-icons/md";
+import { FaPlay } from "react-icons/fa";
 
 export default function App() {
   const [word, setWord] = useState('');
   const [guess, setGuess] = useState('');
   const [maskedWord, setMaskedWord] = useState('');
   const [gameOver, setGameOver] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false);
 
-  console.log(word);
+  const fetchWord = async () => {
+    try {
+      const response = await axios.get('https://api.dicionario-aberto.net/random');
+      setWord(response.data.word.toLowerCase());
+    } catch (error) {
+      console.error('Erro ao buscar as palavras:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchWord = async () => {
-      try {
-        const response = await axios.get('https://api.dicionario-aberto.net/random');
-        setWord(response.data.word.toLowerCase());
-      } catch (error) {
-        console.error('Erro ao buscar as palavras:', error);
-      }
-    };
-
     fetchWord();
   }, []);
 
   useEffect(() => {
     setMaskedWord(maskWord());
   }, [word]);
+
+  function startGame() {
+    setGameStarted(true);
+  }
+
+  function restartGame() {
+    setGameStarted(false);
+    setGuess('');
+    setGameOver(false);
+    fetchWord();
+  }
 
   function maskWord() {
     return word.split('').map((letter) => (letter === ' ' ? ' ' : '_')).join('');
@@ -36,7 +47,6 @@ export default function App() {
     e.preventDefault();
 
     if (word.includes(guess)) {
-      console.log("A palavra tem essa letra.");
       const newMaskedWord = word
         .split('')
         .map((letter, index) => (letter === guess || letter === ' ' ? letter : maskedWord[index]))
@@ -45,13 +55,9 @@ export default function App() {
       setMaskedWord(newMaskedWord);
 
       if (!newMaskedWord.includes('_')) {
-        console.log("Parabéns! Você acertou todas as letras.");
         setGameOver(true);
       }
-    } else {
-      console.log("A palavra não tem essa letra.");
     }
-
     setGuess('');
   }
 
@@ -61,29 +67,35 @@ export default function App() {
         {gameOver ? (
           <div className="game-end">
             <h2>Parabéns você acertou a palavra!</h2>
-            <button onClick={() => setGameOver(false)} >Jogar novamente</button>
+            <button onClick={restartGame}>Jogar novamente</button>
           </div>
-        ) : maskedWord ? (
+        ) : gameStarted ? (
           <>
             <form onSubmit={checkGuess} className="game-container">
-              <p>{maskedWord}</p>
+              <p>{maskedWord ? maskedWord : <h2>Escolhendo a palavra...</h2>}</p>
               <input
                 onChange={(e) => setGuess(e.target.value)}
                 maxLength={1}
                 value={guess}
               />
             </form>
-            
-            <div className="restart-game-container" >
-              <button onClick={() => setGameOver(false)}>
+
+            <div className="restart-game-container">
+              <button onClick={restartGame}>
                 <MdOutlineRefresh color="#FFF" size={50} />
               </button>
             </div>
           </>
         ) : (
-          <h2>Escolhendo a palavra...</h2>
+          <div className="start-game">
+            <FaPlay
+              color="#FFF"
+              size={80}
+              onClick={startGame}
+            />
+          </div>
         )}
       </div>
     </div>
-  )
+  );
 }
