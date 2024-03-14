@@ -10,6 +10,7 @@ export default function App() {
   const [maskedWord, setMaskedWord] = useState('');
   const [gameOver, setGameOver] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   const fetchWord = async () => {
     try {
@@ -36,6 +37,7 @@ export default function App() {
     setGameStarted(false);
     setGuess('');
     setGameOver(false);
+    setAttempt(0);
     fetchWord();
   }
 
@@ -46,18 +48,26 @@ export default function App() {
   function checkGuess(e) {
     e.preventDefault();
 
-    if (word.includes(guess)) {
-      const newMaskedWord = word
-        .split('')
-        .map((letter, index) => (letter === guess || letter === ' ' ? letter : maskedWord[index]))
-        .join('');
+    if (!gameOver) {
+      if (word.includes(guess)) {
+        const newMaskedWord = word
+          .split('')
+          .map((letter, index) => (letter === guess || letter === ' ' ? letter : maskedWord[index]))
+          .join('');
 
-      setMaskedWord(newMaskedWord);
+        setMaskedWord(newMaskedWord);
 
-      if (!newMaskedWord.includes('_')) {
-        setGameOver(true);
+        if (!newMaskedWord.includes('_')) {
+          setGameOver(true);
+        }
+      } else {
+        setAttempt(attempt + 1);
+        if (attempt >= 9) {
+          setGameOver(true);
+        }
       }
     }
+
     setGuess('');
   }
 
@@ -66,7 +76,7 @@ export default function App() {
       <div className="black-board">
         {gameOver ? (
           <div className="game-end">
-            <h2>Parabéns você acertou a palavra!</h2>
+            <h2>{maskedWord === word ? "Parabéns você acertou a palavra!" : "Game Over"}</h2>
             <button onClick={restartGame}>Jogar novamente</button>
           </div>
         ) : gameStarted ? (
@@ -78,6 +88,7 @@ export default function App() {
                 maxLength={1}
                 value={guess}
               />
+              <h1>{attempt}</h1>
             </form>
 
             <div className="restart-game-container">
