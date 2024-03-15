@@ -4,6 +4,25 @@ import axios from 'axios';
 import { MdOutlineRefresh } from "react-icons/md";
 import { FaPlay } from "react-icons/fa";
 
+function Puppet({ attempts }) {
+  const parts = ['head', 'left-arm', 'body', 'right-arm', 'left-leg', 'right-leg'];
+
+  return (
+    <div className="puppet">
+      <div className={attempts >= 1 ? "head visible" : "head"} />
+      <div className="stem">
+        <div className={attempts >= 2 ? "left-arm visible" : "left-arm"} />
+        <div className={attempts >= 3 ? "body visible" : "body"} />
+        <div className={attempts >= 4 ? "right-arm visible" : "right-arm"} />
+      </div>
+      <div className="legs">
+        <div className={attempts >= 5 ? "left-leg visible" : "left-leg"} />
+        <div className={attempts >= 6 ? "right-leg visible" : "right-leg"} />
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [word, setWord] = useState('');
   const [guess, setGuess] = useState('');
@@ -61,8 +80,8 @@ export default function App() {
           setGameOver(true);
         }
       } else {
-        setAttempt(attempt + 1);
-        if (attempt >= 9) {
+        setAttempt(prevAttempt => prevAttempt + 1);
+        if (attempt >= 5) {
           setGameOver(true);
         }
       }
@@ -80,23 +99,25 @@ export default function App() {
             <button onClick={restartGame}>Jogar novamente</button>
           </div>
         ) : gameStarted ? (
-          <>
-            <form onSubmit={checkGuess} className="game-container">
-              <p>{maskedWord ? maskedWord : <h2>Escolhendo a palavra...</h2>}</p>
-              <input
-                onChange={(e) => setGuess(e.target.value)}
-                maxLength={1}
-                value={guess}
-              />
-              <h1>{attempt}</h1>
-            </form>
+          <div className="separator-container">
+            <div className="separator">
+              <Puppet attempts={attempt} />
+              <form onSubmit={checkGuess} className="game-container">
+                <p>{maskedWord ? maskedWord : <h2>Escolhendo a palavra...</h2>}</p>
+                <input
+                  onChange={(e) => setGuess(e.target.value)}
+                  maxLength={1}
+                  value={guess}
+                />
+              </form>
+            </div>
 
             <div className="restart-game-container">
               <button onClick={restartGame}>
                 <MdOutlineRefresh color="#FFF" size={50} />
               </button>
             </div>
-          </>
+          </div>
         ) : (
           <div className="start-game">
             <FaPlay
