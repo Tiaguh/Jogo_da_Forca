@@ -43,14 +43,31 @@ a:focus {
   color: #FFF;
 }
 
-.game-container {
+.separator-container {
   width: 100%;
-  height: 70%;
+  height: 100%;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.separator {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-container {
+  width: 60%;
+  height: 90%;
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   align-items: center;
+  justify-content: center;
 }
 
 .game-container p {
@@ -145,4 +162,79 @@ a:focus {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* Corpo boneco */
+
+.puppet {
+  width: 40%;
+  height: 90%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.head {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 50px;
+  border: 4px solid #FFF;
+}
+
+.stem {
+  display: flex;
+  gap: 15px;
+}
+
+.body {
+  width: 3px;
+  height: 65px;
+
+  background-color: #FFF;
+}
+
+.left-arm {
+  width: 3px;
+  height: 50px;
+
+  background-color: #FFF;
+
+  transform: rotate(45deg)
+}
+
+.right-arm {
+  width: 3px;
+  height: 50px;
+
+  background-color: #FFF;
+
+  transform: rotate(135deg)
+}
+
+.legs {
+  display: flex;
+  gap: 25px;
+
+  margin: -5px;
+}
+
+.left-leg {
+  width: 3px;
+  height: 60px;
+
+  background-color: #FFF;
+
+  transform: rotate(30deg)
+}
+
+.right-leg {
+  width: 3px;
+  height: 60px;
+
+  background-color: #FFF;
+
+  transform: rotate(-30deg)
 }
