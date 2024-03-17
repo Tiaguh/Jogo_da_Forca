@@ -4,33 +4,6 @@ import axios from 'axios';
 import { MdOutlineRefresh } from "react-icons/md";
 import { FaPlay } from "react-icons/fa";
 
-function Puppet({ attempts }) {
-  const parts = [
-    attempts >= 1 ? "visible" : "",
-    attempts >= 2 ? "visible" : "",
-    attempts >= 3 ? "visible" : "",
-    attempts >= 4 ? "visible" : "",
-    attempts >= 5 ? "visible" : "",
-    attempts >= 6 ? "visible" : ""
-  ];
-
-  return (
-    <div className="puppet">
-      <div className={`head ${parts[0]}`} />
-      <div className="stem">
-        <div className={`left-arm ${parts[1]}`} />
-        <div className={`body ${parts[2]}`} />
-        <div className={`right-arm ${parts[3]}`} />
-      </div>
-      <div className="legs">
-        <div className={`left-leg ${parts[4]}`} />
-        <div className={`right-leg ${parts[5]}`} />
-      </div>
-    </div>
-  );
-}
-
-
 export default function App() {
   const [word, setWord] = useState('');
   const [guess, setGuess] = useState('');
@@ -88,8 +61,8 @@ export default function App() {
           setGameOver(true);
         }
       } else {
-        setAttempt(prevAttempt => prevAttempt + 1);
-        if (attempt + 1 >= 5) {
+        setAttempt(attempt + 1);
+        if (attempt >= 9) {
           setGameOver(true);
         }
       }
@@ -109,7 +82,20 @@ export default function App() {
         ) : gameStarted ? (
           <div className="separator-container">
             <div className="separator">
-              <Puppet attempts={gameOver ? 5 : attempt} />
+
+              <div className="puppet">
+                <div className="head" />
+                <div className="stem">
+                  <div className="left-arm" />
+                  <div className="body" />
+                  <div className="right-arm" />
+                </div>
+                <div className="legs">
+                  <div className="left-leg" />
+                  <div className="right-leg" />
+                </div>
+              </div>
+
               <form onSubmit={checkGuess} className="game-container">
                 <p>{maskedWord ? maskedWord : <h2>Escolhendo a palavra...</h2>}</p>
                 <input
@@ -117,9 +103,6 @@ export default function App() {
                   maxLength={1}
                   value={guess}
                 />
-
-                {attempt}
-
               </form>
             </div>
 
