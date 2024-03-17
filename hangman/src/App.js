@@ -5,23 +5,31 @@ import { MdOutlineRefresh } from "react-icons/md";
 import { FaPlay } from "react-icons/fa";
 
 function Puppet({ attempts }) {
-  const parts = ['head', 'left-arm', 'body', 'right-arm', 'left-leg', 'right-leg'];
+  const parts = [
+    attempts >= 1 ? "visible" : "",
+    attempts >= 2 ? "visible" : "",
+    attempts >= 3 ? "visible" : "",
+    attempts >= 4 ? "visible" : "",
+    attempts >= 5 ? "visible" : "",
+    attempts >= 6 ? "visible" : ""
+  ];
 
   return (
     <div className="puppet">
-      <div className={attempts >= 1 ? "head visible" : "head"} />
+      <div className={`head ${parts[0]}`} />
       <div className="stem">
-        <div className={attempts >= 2 ? "left-arm visible" : "left-arm"} />
-        <div className={attempts >= 3 ? "body visible" : "body"} />
-        <div className={attempts >= 4 ? "right-arm visible" : "right-arm"} />
+        <div className={`left-arm ${parts[1]}`} />
+        <div className={`body ${parts[2]}`} />
+        <div className={`right-arm ${parts[3]}`} />
       </div>
       <div className="legs">
-        <div className={attempts >= 5 ? "left-leg visible" : "left-leg"} />
-        <div className={attempts >= 6 ? "right-leg visible" : "right-leg"} />
+        <div className={`left-leg ${parts[4]}`} />
+        <div className={`right-leg ${parts[5]}`} />
       </div>
     </div>
   );
 }
+
 
 export default function App() {
   const [word, setWord] = useState('');
@@ -81,7 +89,7 @@ export default function App() {
         }
       } else {
         setAttempt(prevAttempt => prevAttempt + 1);
-        if (attempt >= 5) {
+        if (attempt + 1 >= 5) {
           setGameOver(true);
         }
       }
@@ -101,7 +109,7 @@ export default function App() {
         ) : gameStarted ? (
           <div className="separator-container">
             <div className="separator">
-              <Puppet attempts={attempt} />
+              <Puppet attempts={gameOver ? 5 : attempt} />
               <form onSubmit={checkGuess} className="game-container">
                 <p>{maskedWord ? maskedWord : <h2>Escolhendo a palavra...</h2>}</p>
                 <input
@@ -109,6 +117,9 @@ export default function App() {
                   maxLength={1}
                   value={guess}
                 />
+
+                {attempt}
+
               </form>
             </div>
 
