@@ -81,18 +81,19 @@ export default function App() {
           </div>
         ) : gameStarted ? (
           <div className="separator-container">
+
             <div className="separator">
 
               <div className="puppet">
-                <div className="head" />
+                <div className="head" style={{ display: attempt >= 1 ? 'block' : 'none' }} />
                 <div className="stem">
-                  <div className="left-arm" />
-                  <div className="body" />
-                  <div className="right-arm" />
+                  <div className="left-arm" style={{ display: attempt >= 2 ? 'block' : 'none' }} />
+                  <div className="body" style={{ display: attempt >= 3 ? 'block' : 'none' }} />
+                  <div className="right-arm" style={{ display: attempt >= 4 ? 'block' : 'none' }} />
                 </div>
                 <div className="legs">
-                  <div className="left-leg" />
-                  <div className="right-leg" />
+                  <div className="left-leg" style={{ display: attempt >= 5 ? 'block' : 'none' }} />
+                  <div className="right-leg" style={{ display: attempt >= 6 ? 'block' : 'none' }} />
                 </div>
               </div>
 
@@ -105,6 +106,7 @@ export default function App() {
                 />
               </form>
             </div>
+
 
             <div className="restart-game-container">
               <button onClick={restartGame}>
