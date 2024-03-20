@@ -62,7 +62,7 @@ export default function App() {
         }
       } else {
         setAttempt(attempt + 1);
-        if (attempt >= 9) {
+        if (attempt >= 5) {
           setGameOver(true);
         }
       }
@@ -70,6 +70,8 @@ export default function App() {
 
     setGuess('');
   }
+
+  // Lista de letras que já foram jogadas
 
   return (
     <div className="container">
@@ -87,8 +89,8 @@ export default function App() {
               <div className="puppet">
                 <div className="head" style={{ display: attempt >= 1 ? 'block' : 'none' }} />
                 <div className="stem">
-                  <div className="left-arm" style={{ display: attempt >= 2 ? 'block' : 'none' }} />
-                  <div className="body" style={{ display: attempt >= 3 ? 'block' : 'none' }} />
+                  <div className="left-arm" style={{ display: attempt >= 3 ? 'block' : 'none' }} />
+                  <div className="body" style={{ display: attempt >= 2 ? 'block' : 'none' }} />
                   <div className="right-arm" style={{ display: attempt >= 4 ? 'block' : 'none' }} />
                 </div>
                 <div className="legs">
