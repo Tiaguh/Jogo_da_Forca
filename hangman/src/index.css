@@ -46,7 +46,7 @@ a:focus {
 .separator-container {
   width: 100%;
   height: 100%;
-  
+
   display: flex;
   flex-direction: column;
 }
@@ -81,7 +81,7 @@ a:focus {
 }
 
 .game-container input {
-  width: 50px;
+  width: 100px;
   height: 50px;
 
   border: none;
@@ -110,10 +110,20 @@ a:focus {
   height: 30%;
 
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 
   padding-inline: 25px;
+}
+
+.restart-game-container h3 {
+  font-size: 30px;
+  font-family: "VT323", monospace;
+  font-weight: normal;
+
+  color: #FFF;
+
+  text-align: center;
 }
 
 .restart-game-container button {
@@ -121,6 +131,22 @@ a:focus {
   border: none;
 
   cursor: pointer;
+}
+
+.selected-letters {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.selected-letters span {
+  font-size: 30px;
+  font-family: "VT323", monospace;
+  font-weight: normal;
+
+  color: #FFF;
+
+  text-align: center;
 }
 
 .game-end {

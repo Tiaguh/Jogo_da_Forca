@@ -11,6 +11,7 @@ export default function App() {
   const [gameOver, setGameOver] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [attempt, setAttempt] = useState(0);
+  const [letters, setLetters] = useState([]);
 
   const fetchWord = async () => {
     try {
@@ -38,6 +39,7 @@ export default function App() {
     setGuess('');
     setGameOver(false);
     setAttempt(0);
+    setLetters([]);
     fetchWord();
   }
 
@@ -66,12 +68,12 @@ export default function App() {
           setGameOver(true);
         }
       }
+
+      setLetters([...letters, guess]);
     }
 
     setGuess('');
   }
-
-  // Lista de letras que já foram jogadas
 
   return (
     <div className="container">
@@ -83,9 +85,7 @@ export default function App() {
           </div>
         ) : gameStarted ? (
           <div className="separator-container">
-
             <div className="separator">
-
               <div className="puppet">
                 <div className="head" style={{ display: attempt >= 1 ? 'block' : 'none' }} />
                 <div className="stem">
@@ -98,7 +98,6 @@ export default function App() {
                   <div className="right-leg" style={{ display: attempt >= 6 ? 'block' : 'none' }} />
                 </div>
               </div>
-
               <form onSubmit={checkGuess} className="game-container">
                 <p>{maskedWord ? maskedWord : <h2>Escolhendo a palavra...</h2>}</p>
                 <input
@@ -108,9 +107,18 @@ export default function App() {
                 />
               </form>
             </div>
-
-
+            
             <div className="restart-game-container">
+
+              <div className="selected-letters">
+                <h3>Letras escolhidas:</h3>
+                <div>
+                  {letters.map((letter, index) => (
+                    <span key={index}>{letter} - </span>
+                  ))}
+                </div>
+              </div>
+
               <button onClick={restartGame}>
                 <MdOutlineRefresh color="#FFF" size={50} />
               </button>
