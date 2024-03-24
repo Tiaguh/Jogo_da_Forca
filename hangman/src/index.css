@@ -229,7 +229,8 @@ a:focus {
 
   background-color: #FFF;
 
-  transform: rotate(45deg)
+  transform: rotate(45deg);
+  margin-left: -15px;
 }
 
 .right-arm {
@@ -238,14 +239,16 @@ a:focus {
 
   background-color: #FFF;
 
-  transform: rotate(135deg)
+  transform: rotate(135deg);
+  margin-right: -15px;
 }
 
 .legs {
+  width: 60px;
+
   display: flex;
   gap: 25px;
-
-  margin: -5px;
+  justify-content: space-between;
 }
 
 .left-leg {
@@ -254,7 +257,9 @@ a:focus {
 
   background-color: #FFF;
 
-  transform: rotate(30deg)
+  transform: rotate(30deg);
+
+  margin-left: 30px;
 }
 
 .right-leg {
@@ -263,5 +268,7 @@ a:focus {
 
   background-color: #FFF;
 
-  transform: rotate(-30deg)
+  transform: rotate(-30deg);
+
+  /* margin-left: 30px; */
 }

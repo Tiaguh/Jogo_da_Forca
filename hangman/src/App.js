@@ -64,7 +64,7 @@ export default function App() {
         }
       } else {
         setAttempt(attempt + 1);
-        if (attempt >= 5) {
+        if (attempt >= 10) {
           setGameOver(true);
         }
       }
