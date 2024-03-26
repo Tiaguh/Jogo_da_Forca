@@ -51,6 +51,10 @@ export default function App() {
     e.preventDefault();
 
     if (!gameOver) {
+      if (letters.includes(guess)) {
+        return;
+      }
+
       if (word.includes(guess)) {
         const newMaskedWord = word
           .split('')
@@ -107,7 +111,7 @@ export default function App() {
                 />
               </form>
             </div>
-            
+
             <div className="restart-game-container">
 
               <div className="selected-letters">
